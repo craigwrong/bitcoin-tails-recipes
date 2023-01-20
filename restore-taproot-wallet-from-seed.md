@@ -33,16 +33,18 @@ Start with a WIF seed from a legacy wallet dump using derivation paths: m/0'/0'/
 
 Using Bitcoin Explorer (bx) to derive the private key controlling the first address:
 
-bx wif-to-ec <SEED> | bx hd-new
+    bx wif-to-ec <SEED> | bx hd-new
 
 Find the checksums.
 
-getdescriptorinfo "wpkh(xprv.../0h/0h/*h)"
-getdescriptorinfo "wpkh(xprv.../0h/1h/*h)"
+    getdescriptorinfo "wpkh(xprv.../0h/0h/*h)"
+    getdescriptorinfo "wpkh(xprv.../0h/1h/*h)"
 
-bitcoin-cli importdescriptors '[{ "desc": "wpkh(xprv.../0h/0h/*h)#<CHECKSUM>", "timestamp": "now", "active": true, "label": "Legacy" },{ "desc": "wpkh(xprv.../0h/1h/*h)#<CHECKSUM_2>", "timestamp": "now", "active": true, "internal": true }]'
+Import descriptors.
+
+    bitcoin-cli importdescriptors '[{ "desc": "wpkh(xprv.../0h/0h/*h)#<CHECKSUM>", "timestamp": "now", "active": true, "label": "Legacy" },{ "desc": "wpkh(xprv.../0h/1h/*h)#<CHECKSUM_2>", "timestamp": "now", "active": true, "internal": true }]'
 
 To derive the specific private key for the first address, as shown on a legacy wallet dump:
 
-bx hd-private -d -i 0 <XPRIV> | bx hd-private -d -i 0 | bx hd-private -d -i 0 | bx hd-to-ec | bx ec-to-wif
+    bx hd-private -d -i 0 <XPRIV> | bx hd-private -d -i 0 | bx hd-private -d -i 0 | bx hd-to-ec | bx ec-to-wif
 
